@@ -1,0 +1,51 @@
+steps:
+#Clone from GitHub Repository  
+- name: 'gcr.io/cloud-builders/git'
+  args: ['clone','https://github.com/skumar-wa/ps-test-project.git']
+
+#Build the image 
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build','-t','gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_VERSION}','.']
+
+#Push the image  
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push','gcr.io/${_PROJECT_ID}/${_IMAGE_NAME}:${_VERSION}']
+
+# Configure a kubectl workspace
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: ['cluster-info']
+  env:
+    - CLOUDSDK_COMPUTE_REGION=${_REGION}
+    - CLOUDSDK_CONTAINER_CLUSTER=${_GKE_CLUSTER}
+    - KUBECONFIG=/workspace/.kube/config
+
+# Deploy with Helm
+- name: 'gcr.io/${_PROJECT_ID}/helm'
+  args:
+    - upgrade
+    - --install
+    - ps-test-helm
+    - ./kubernetes
+    - --namespace
+    - ps-test-demo
+    - --set
+    - image.repository=gcr.io/${_PROJECT_ID}/${_IMAGE_NAME},image.tag=${_VERSION}
+    - -f
+    - ./kubernetes/values.yaml
+  env:
+    - KUBECONFIG=/workspace/.kube/config
+  
+substitutions:
+    #GCP Specific configuration
+    _PROJECT_ID: ps-tech-demo
+    _REGION: europe-west2
+    _GKE_CLUSTER: ps-test-skumar-cluster-demo
+    
+    #Repository Specific configuration.
+    _IMAGE_NAME: ps-test-app
+    
+    # App specific configuration
+    _VERSION: v1.0
+    
+options:
+    substitution_option: 'ALLOW_LOOSE'
