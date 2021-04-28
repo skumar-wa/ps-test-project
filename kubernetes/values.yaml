@@ -46,17 +46,9 @@ ingress:
     kubernetes.io/ingress.class: "gce"
     cloud.google.com/load-balancer-type: "External"
   hosts: []
-    # - host: chart-example.local
-    #   paths:
-    #   - path: /
-    #     backend:
-    #       serviceName: chart-example.local
-    #       servicePort: 80
+ 
   tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
-
+ 
 resources:
   limits:
     cpu: 100m
