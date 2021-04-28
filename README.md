@@ -11,7 +11,7 @@ A [sample application](https://github.com/skumar-wa/ps-test-project/tree/main/ap
 ![image](https://user-images.githubusercontent.com/83188995/116360003-61881100-a7f7-11eb-8a64-94b735bc868b.png)
 
 ## Deploying App on the created GKE cluster
-Continuous integration, delivery and deployment are implemented using Google Cloud Build and [Helm 3 charts](https://github.com/skumar-wa/ps-test-project/tree/main/kubernetes). Workflow is defined in [Cloud build configuration file](https://github.com/skumar-wa/ps-test-project/blob/main/cloudbuild.yaml). A snapshot of a run is provided below
+Continuous integration, delivery and deployment are implemented using Google Cloud Build and [Helm 3 charts](https://github.com/skumar-wa/ps-test-project/tree/main/kubernetes).Helm image is built from [cloud builder community repo ](https://github.com/GoogleCloudPlatform/cloud-builders-community/tree/master/helm). Workflow is defined in [Cloud build configuration file](https://github.com/skumar-wa/ps-test-project/blob/main/cloudbuild.yaml). A snapshot of a run is provided below
 
 <img width="625" alt="GitHubCloudBuild" src="https://user-images.githubusercontent.com/83188995/116363186-c5f89f80-a7fa-11eb-9e23-000e83afd036.PNG">
 
