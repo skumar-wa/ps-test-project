@@ -31,6 +31,6 @@ Pods scale to 11 with 30 users making 1000 requests
 
 
 ### Auto-Scale in after tests stopped
-Pods scale into 1 ( initial number ) after tests, snapshots is taken during the process when pod replicas dropped to 2
+Pods scale into 1 ( initial number ) after tests, snapshot is taken during the process when pod replicas dropped to 2
 
 <img width="793" alt="AutoScaleIn" src="https://user-images.githubusercontent.com/83188995/116367832-a2842380-a7ff-11eb-8b13-36a71a642aff.PNG">
